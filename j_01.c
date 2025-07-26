@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 int main() {
-    int escolhaJogador, escolhaComputador;
+    int escolhaComputador;
+    char *escolhaJogador = "";
     int jogarNovamente = 1; // controla o loop do jogo
 
     srand(time(0)); // inicializa a semente do rand uma vez
@@ -15,33 +17,51 @@ int main() {
         printf("2. Papel\n");
         printf("3. Tesoura\n");
         printf("Escolha: ");
-        scanf("%d", &escolhaJogador);
+        scanf("%s", escolhaJogador);
+        
+        printf ("valor lido: %s", escolhaJogador);
 
-        // Gera a jogada do computador
-        escolhaComputador = rand() % 3 + 1;
+        // // Gera a jogada do computador
+         escolhaComputador = (rand() % 3); // sorteia numero de 0 a 2
+         escolhaComputador ++; // incrementa para o numero ser de 1 a 3
 
-        // Mostra a escolha do jogador
-        switch (escolhaJogador) {
-            case 1: printf("Jogador: Pedra\n"); break;
-            case 2: printf("Jogador: Papel\n"); break;
-            case 3: printf("Jogador: Tesoura\n"); break;
-            default: printf("Opcao invalida!\n"); continue;
+        printf ("escolha do computador: %d", escolhaComputador);
+
+        if (strcmp(escolhaJogador, "1")){
+            printf ("Jogador: Pedra\n");
+        }
+        else if (strcmp(escolhaJogador, "2")){
+            printf ("Jogador: Papel\n");
+        }
+        else if (strcmp(escolhaJogador, "3")){
+            printf ("Jogador: Tesoura\n");
+        }
+        else { 
+            printf ("opcao invalida\n");
+        
+        }
+       
+       // escolha do computador
+
+        if (escolhaComputador == 1){
+            printf ("Computador: Pedra\n");
+        }
+        else if (escolhaComputador == 2){
+            printf ("Computador: Papel\n");
+
+        }
+        else if (escolhaComputador == 3){
+
+            printf ("Computador: Tesoura\n");
         }
 
-        // Mostra a escolha do computador
-        switch (escolhaComputador) {
-            case 1: printf("Computador: Pedra\n"); break;
-            case 2: printf("Computador: Papel\n"); break;
-            case 3: printf("Computador: Tesoura\n"); break;
-        }
-
-        // Lógica do resultado
-        if (escolhaJogador == escolhaComputador) {
+        // Lï¿½gica do resultado
+        if (atoi(escolhaJogador) == escolhaComputador) {
             printf("### Jogo empatou ###\n");
         } else if (
-            (escolhaJogador == 1 && escolhaComputador == 3) ||
-            (escolhaJogador == 2 && escolhaComputador == 1) ||
-            (escolhaJogador == 3 && escolhaComputador == 2)) {
+            (atoi(escolhaJogador) == 1 && escolhaComputador == 3) ||
+            (atoi(escolhaJogador) == 2 && escolhaComputador == 1) ||
+            (atoi(escolhaJogador) == 3 && escolhaComputador == 2)) {
             printf("### Parabens, voce ganhou! ###\n");
         } else {
             printf("### Voce perdeu... ###\n");
